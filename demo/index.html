@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js" lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Waterify Test</title>
+		<link rel="stylesheet" href="turret.css">
+		<style type="text/css">
+			.media {
+			    background-color: transparent;
+			}
+			.media>canvas {
+				display: block;
+			    position: absolute;
+			    top: 0;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			}
+			.circle {
+				border-radius: 100%;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="container">
+			<div class="column-1 margin-top-medium text-center">
+				<h1>Image Displacement</h1>
+			</div>
+			<div class="column-1-2 margin-top-large">
+				<div class="media media-1">
+					<img src="test1.jpg" class="circle" 
+						data-waterify data-waterify-speed="0.000001" 
+						data-waterify-amount="200" 
+						data-waterify-ease="1000"
+						data-waterify-displacement-url="displacement_map2.jpg" />
+				</div>
+			</div>
+			<div class="column-1-2 margin-top-large">
+				<div class="media media-1">
+					<img src="test4.jpg" class="circle" 
+						data-waterify data-waterify-speed="0.5" 
+						data-waterify-amount="20" />
+				</div>
+			</div>
+			<div class="column-1-2 margin-top-large">
+				<div class="media media-1">
+					<img src="test2.jpg" class="circle" 
+						data-waterify data-waterify-speed="0.5" 
+						data-waterify-amount="50" />
+				</div>
+			</div>
+			<div class="column-1-2 margin-top-large">
+				<div class="media media-1">
+					<img src="test3.jpg" class="circle" 
+						data-waterify data-waterify-speed="5" 
+						data-waterify-amount="20" />
+				</div>
+			</div>
+		</div>
+
+		<script src="../dist/waterify.js"></script>
+
+	</body>
+</html>		
