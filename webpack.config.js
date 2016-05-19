@@ -6,7 +6,7 @@ module.exports = {
 		waterify: './src/index.js',
 	},
 	output: {
-		path: path.join(__dirname, 'demo', 'dist'),
+		path: path.join(__dirname, 'dist'),
 		filename: '[name].js',
 	},
 	plugins: [new webpack.NoErrorsPlugin()],
