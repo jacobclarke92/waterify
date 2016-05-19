@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import $ from 'jquery'
 import PIXI, { Container, Sprite, BaseTexture, Texture } from 'pixi.js'
 import displacementImageUrl from './displacementImage'
