@@ -1,4 +1,4 @@
-import 'babel-polyfill'
+// import 'babel-polyfill'
 import $ from 'jquery'
 import PIXI, { Container, Sprite, BaseTexture, Texture } from 'pixi.js'
 import displacementImageUrl from './displacementImage'
@@ -55,9 +55,9 @@ function createCanvas(elem) {
 		// const displacementScale = $elem.data('waterify-displacement-scale') || 1;
 		
 		const attributes = $elem.prop('attributes');
-		for(let attribute of attributes) {
-			$(canvas).attr(attribute.name, attribute.value);
-		}
+		$.each(attributes, function() {
+			$(canvas).attr(this.name, this.value);
+		});
 
 		// _displacementTexture.width *= displacementScale;
 		// _displacementTexture.height *= displacementScale;
