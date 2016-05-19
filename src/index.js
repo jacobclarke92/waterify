@@ -47,9 +47,9 @@ function createCanvas(elem) {
 	const image = new Image();
 	image.onload = function() {
 
-		const speed = $elem.data('waterify-speed') || 1;
-		const speedX = $elem.data('waterify-speed-x') || null;
-		const speedY = $elem.data('waterify-speed-y') || null;
+		const speed = typeof $elem.data('waterify-speed') == 'number' ? $elem.data('waterify-speed') : 1;
+		const speedX = typeof $elem.data('waterify-speed-x') == 'number' ? $elem.data('waterify-speed-x') : null;
+		const speedY = typeof $elem.data('waterify-speed-y') == 'number' ? $elem.data('waterify-speed-y') : null;
 		const startScale = $elem.data('waterify-start-amount') || 0;
 		// const displacementScale = $elem.data('waterify-displacement-scale') || 1;
 		
