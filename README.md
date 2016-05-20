@@ -1,4 +1,4 @@
-# React WebGL Image Editing
+# Waterify - Image Displacement Demo
 
 Creates a water-like effect using displacement maps.  
 Under the hood I use Pixi.js and jQuery  
