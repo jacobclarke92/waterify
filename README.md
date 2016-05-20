@@ -25,6 +25,6 @@ A note on the speeds:
 There is one more data tag `data-waterify-speed` which applies to both x and y.  
 Also if you provide an x speed and no y speed then y will be presumed as 0, and vice versa.
 
-
+Is optimised for HiDPI screens!  
 Canvas matches image size attributes (if provided, e.g. `width="300" height="200"`)  
-If image has responsive styles (e.g. `width: 100%; height: auto;`) canvas will resize appropriately on window resize
+If image has responsive styles (e.g. `width: 100%; height: auto;`) canvas will resize appropriately on window resize.
