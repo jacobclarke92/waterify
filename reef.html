@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Waterify Test</title>
+		<link rel="stylesheet" href="demo/turret.css">
+		<style type="text/css">
+			.media {
+			    background-color: transparent;
+			}
+			.media>canvas {
+				display: block;
+			    position: absolute;
+			    top: 0;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="container">
+			<div class="column-2-3 column-center">
+				<div class="media media-1">
+					<img src="demo/reef.jpg"
+						data-waterify 
+						data-waterify-speed="4" 
+						data-waterify-amount="12"
+						data-waterify-mask-url="demo/mask2.png" />
+				</div>
+			</div>
+		</div>
+
+		<script src="dist/waterify.js"></script>
+
+	</body>
+</html>		
