@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack -d --watch --progress",
     "deploy": "webpack -p --progress && packer -i dist/waterify.js -o dist/waterify.min.js -b",
-    "build": "babel src/ -d es5 --presets es2015"
+    "build": "babel src/ -d es5 --presets es2015",
+    "prepublish": "rm -rf es5 dist && npm run build && npm run deploy"
   },
   "keywords": [
     "waterify",
