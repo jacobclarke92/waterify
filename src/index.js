@@ -51,6 +51,7 @@ function createCanvas(elem) {
 	let _maskTexture = null;
 
 	const image = new Image();
+	image.crossOrigin = '';
 	image.onload = function() {
 
 		const _imageRef = this;
@@ -134,6 +135,7 @@ function createCanvas(elem) {
 
 	if(maskUrl) {
 		const maskImage = new Image();
+		maskImage.crossOrigin = '';
 		maskImage.onload = function() {
 			maskImageLoaded = true;
 			_maskTexture = new Texture(new BaseTexture(this));
@@ -146,6 +148,7 @@ function createCanvas(elem) {
 
 	if(displacementUrl) {
 		const _displacementImage = new Image();
+		_displacementImage.crossOrigin = '';
 		_displacementImage.onload = function() {
 			displacementImageLoaded = true;
 			_displacementTexture = new Texture(new BaseTexture(this));
