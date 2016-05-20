@@ -4,7 +4,6 @@ import PIXI, { Container, Sprite, BaseTexture, Texture } from 'pixi.js'
 import displacementImageUrl from './displacementImage'
 import _throttle from 'lodash.throttle'
 
-console.log(PIXI);
 let animating = false;
 
 const elements = [];

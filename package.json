@@ -2,11 +2,10 @@
   "name": "waterify",
   "version": "1.0.0",
   "description": "Creates a water effect on top of images using PIXI.JS",
-  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
-    "deploy": "webpack -p",
+    "watch": "webpack -d --watch --progress",
+    "deploy": "webpack -p --progress && packer -i dist/waterify.js -o dist/waterify.min.js -b",
     "build": "babel src/ -d es5 --presets es2015"
   },
   "keywords": [
@@ -22,20 +21,32 @@
   ],
   "author": "Jacob Clarke",
   "license": "ISC",
+  "files": [
+    "es5",
+    "dist",
+    "src"
+  ],
+  "main": "es5/index.js",
   "dependencies": {
     "babel-polyfill": "^6.9.0",
     "jquery": "*",
     "lodash": "^4.12.0",
-    "lodash.throttle": "^4.0.1",
-    "pixi.js": "^3.0.11"
+    "lodash.throttle": "^4.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "json-loader": "^0.5.4",
+    "jquery": "*",
+    "packer": "0.0.6",
+    "pixi.js": "^3.0.11",
     "transform-loader": "^0.2.3",
     "webpack": "^1.13.0",
     "webpack-glsl-loader": "^1.0.1"
+  },
+  "peerDependencies": {
+    "pixi.js": "^3.0.11",
+    "jquery": "*"
   }
 }

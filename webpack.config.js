@@ -9,7 +9,10 @@ module.exports = {
 		path: path.join(__dirname, 'dist'),
 		filename: '[name].js',
 	},
-	plugins: [new webpack.NoErrorsPlugin()],
+	plugins: [
+		new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({'process.env': {'NODE_ENV': JSON.stringify('production')}}),
+	],
 	module: {
 		loaders: [
 			{
