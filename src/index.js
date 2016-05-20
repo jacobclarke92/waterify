@@ -35,13 +35,20 @@ function createCanvas(elem) {
 	const height = $elem.height();
 	const resolution = window.devicePixelRatio || 1;
 
+	const displacementUrl = $elem.data('waterify-displacement-url');
+	const maskUrl = $elem.data('waterify-mask-url');
+	let displacementImageLoaded = false;
+	let maskImageLoaded = false;
+
 	const renderer = new PIXI.autoDetectRenderer(width, height, {resolution, transparent: true});
 
 	const canvas = renderer.view;
 
 	const stage = new Container();
+	const imageContainer = new Container();
 
 	let _displacementTexture = displacementTexture;
+	let _maskTexture = null;
 
 	const image = new Image();
 	image.onload = function() {
@@ -66,9 +73,32 @@ function createCanvas(elem) {
 		const sprite = new Sprite(texture);
 		sprite.width = width;
 		sprite.height = height;
-		stage.addChild(sprite);
+		imageContainer.addChild(sprite);
 
 		sprite.filters = [displacementFilter];
+
+		if(maskUrl) {
+			const maskSprite = new Sprite(_maskTexture, 1);
+			maskSprite.anchor.set(0.5);
+			maskSprite.position.set(width/2, height/2);
+
+			// scale mask to fit image
+			maskSprite.scale.set(Math.min(
+				width / maskSprite.width,
+				height / maskSprite.height
+			));
+
+			imageContainer.mask = maskSprite;
+			imageContainer.addChild(maskSprite);
+
+			// create another image to go underneath masked image
+			const underlaySprite = new Sprite(texture);
+			underlaySprite.width = width;
+			underlaySprite.height = height;
+			stage.addChild(underlaySprite);
+		}
+
+		stage.addChild(imageContainer);
 
 		const attributes = $elem.prop('attributes');
 		$.each(attributes, function() {
@@ -102,17 +132,29 @@ function createCanvas(elem) {
 
 	}
 
-	const displacementUrl = $elem.data('waterify-displacement-url');
+	if(maskUrl) {
+		const maskImage = new Image();
+		maskImage.onload = function() {
+			maskImageLoaded = true;
+			_maskTexture = new Texture(new BaseTexture(this));
+			if(!displacementUrl || (displacementUrl && displacementImageLoaded)) image.src = $elem.attr('src');
+		}
+		maskImage.src = maskUrl;
+	}else{
+		if(!displacementUrl || (displacementUrl && displacementImageLoaded)) image.src = $elem.attr('src');
+	}
+
 	if(displacementUrl) {
 		const _displacementImage = new Image();
 		_displacementImage.onload = function() {
+			displacementImageLoaded = true;
 			_displacementTexture = new Texture(new BaseTexture(this));
-			image.src = $elem.attr('src');
+			if(!maskUrl || (maskUrl && maskImageLoaded)) image.src = $elem.attr('src');
 		}
 		_displacementImage.src = displacementUrl;
 	}else{
-		image.src = $elem.attr('src');
-	}	
+		if(!maskUrl || (maskUrl && maskImageLoaded)) image.src = $elem.attr('src');
+	}
 
 }
 
