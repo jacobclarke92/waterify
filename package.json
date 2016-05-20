@@ -29,8 +29,6 @@
   ],
   "main": "es5/index.js",
   "dependencies": {
-    "babel-polyfill": "^6.9.0",
-    "jquery": "*",
     "lodash": "^4.12.0",
     "lodash.throttle": "^4.0.1"
   },
