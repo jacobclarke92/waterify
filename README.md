@@ -11,10 +11,16 @@ View demo at [http://waterify.bigfish.tv](http://waterify.bigfish.tv)
 Or if you want a plug'n'play just grab from dist (333kb)
 
 
-Implementation is straightforward:
+Implementation can be straightforward:
 
 ```html
-<img src="demo/test1.jpg" class="circle" 
+<img src="demo/test1.jpg" data-waterify />
+```
+
+..or a bit more involved
+
+```html
+<img src="demo/test1.jpg" 
 	data-waterify 
 	data-waterify-speed-x="0.5" 
 	data-waterify-speed-y="5" 
