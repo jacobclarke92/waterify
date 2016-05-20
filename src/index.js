@@ -33,11 +33,9 @@ function createCanvas(elem) {
 	const $elem = $(elem);
 	const width = $elem.width();
 	const height = $elem.height();
+	const resolution = window.devicePixelRatio || 1;
 
-	const renderer = new PIXI.autoDetectRenderer(width, height, {
-		resolution: window.devicePixelRatio || 1,
-		transparent: true,
-	});
+	const renderer = new PIXI.autoDetectRenderer(width, height, {resolution, transparent: true});
 
 	const canvas = renderer.view;
 
@@ -48,16 +46,12 @@ function createCanvas(elem) {
 	const image = new Image();
 	image.onload = function() {
 
+		const _imageRef = this;
 		const speed = typeof $elem.data('waterify-speed') == 'number' ? $elem.data('waterify-speed') : 1;
 		const speedX = typeof $elem.data('waterify-speed-x') == 'number' ? $elem.data('waterify-speed-x') : null;
 		const speedY = typeof $elem.data('waterify-speed-y') == 'number' ? $elem.data('waterify-speed-y') : null;
 		const startScale = $elem.data('waterify-start-amount') || 0;
 		// const displacementScale = $elem.data('waterify-displacement-scale') || 1;
-		
-		const attributes = $elem.prop('attributes');
-		$.each(attributes, function() {
-			$(canvas).attr(this.name, this.value);
-		});
 
 		// _displacementTexture.width *= displacementScale;
 		// _displacementTexture.height *= displacementScale;
@@ -76,6 +70,17 @@ function createCanvas(elem) {
 
 		sprite.filters = [displacementFilter];
 
+		const attributes = $elem.prop('attributes');
+		$.each(attributes, function() {
+			// instead of using image width/height tags on the canvas we use css
+			if(this.name == 'width' && parseFloat(this.value) != _imageRef.width) {
+				$(canvas).css('width', this.value+'px');
+			}else if(this.name == 'height' && parseFloat(this.value) != _imageRef.height) {
+				$(canvas).css('height', this.value+'px');
+			}else {
+				$(canvas).attr(this.name, this.value);
+			}
+		});
 
 		elements.push({
 			original: $elem.clone(),

@@ -91,11 +91,9 @@
 		var $elem = (0, _jquery2.default)(elem);
 		var width = $elem.width();
 		var height = $elem.height();
+		var resolution = window.devicePixelRatio || 1;
 
-		var renderer = new _pixi2.default.autoDetectRenderer(width, height, {
-			resolution: window.devicePixelRatio || 1,
-			transparent: true
-		});
+		var renderer = new _pixi2.default.autoDetectRenderer(width, height, { resolution: resolution, transparent: true });
 
 		var canvas = renderer.view;
 
@@ -106,16 +104,12 @@
 		var image = new Image();
 		image.onload = function () {
 
+			var _imageRef = this;
 			var speed = typeof $elem.data('waterify-speed') == 'number' ? $elem.data('waterify-speed') : 1;
 			var speedX = typeof $elem.data('waterify-speed-x') == 'number' ? $elem.data('waterify-speed-x') : null;
 			var speedY = typeof $elem.data('waterify-speed-y') == 'number' ? $elem.data('waterify-speed-y') : null;
 			var startScale = $elem.data('waterify-start-amount') || 0;
 			// const displacementScale = $elem.data('waterify-displacement-scale') || 1;
-
-			var attributes = $elem.prop('attributes');
-			_jquery2.default.each(attributes, function () {
-				(0, _jquery2.default)(canvas).attr(this.name, this.value);
-			});
 
 			// _displacementTexture.width *= displacementScale;
 			// _displacementTexture.height *= displacementScale;
@@ -133,6 +127,18 @@
 			stage.addChild(sprite);
 
 			sprite.filters = [displacementFilter];
+
+			var attributes = $elem.prop('attributes');
+			_jquery2.default.each(attributes, function () {
+				// instead of using image width/height tags on the canvas we use css
+				if (this.name == 'width' && parseFloat(this.value) != _imageRef.width) {
+					(0, _jquery2.default)(canvas).css('width', this.value + 'px');
+				} else if (this.name == 'height' && parseFloat(this.value) != _imageRef.height) {
+					(0, _jquery2.default)(canvas).css('height', this.value + 'px');
+				} else {
+					(0, _jquery2.default)(canvas).attr(this.name, this.value);
+				}
+			});
 
 			elements.push({
 				original: $elem.clone(),
