@@ -2,6 +2,7 @@
 import $ from 'jquery'
 import PIXI, { Container, Sprite, BaseTexture, Texture } from 'pixi.js'
 import displacementImageUrl from './displacementImage'
+import _throttle from 'lodash.throttle'
 
 console.log(PIXI);
 let animating = false;
@@ -169,7 +170,7 @@ function animate() {
 	if(animating) window.requestAnimationFrame(animate);
 }
 
-function handleResize() {
+function _handleResize() {
 	for(let element of elements) {
 		const width = $(element.canvas).width();
 		const height = $(element.canvas).width();
@@ -180,3 +181,4 @@ function handleResize() {
 		}
 	}
 }
+const handleResize = _throttle(_handleResize, 1000/60);
